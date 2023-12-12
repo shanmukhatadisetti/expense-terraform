@@ -16,6 +16,16 @@ resource "aws_route53_record" "frontend" {
   records = [aws_instance.frontend.private_ip]
 }
 
+resource "null_resource" "frontend" {
+  provisioner "local-exec" {
+    command = <<EOF
+cd /home/centos/expense-terraform/expense_version-1
+git pull
+ansible-playbook ${aws_instance.frontend.private_ip}, ansible_user=centos ansible_password=DevOps321 main.yml -e role_name=frontend
+EOF
+  }
+}
+
 resource "aws_instance" "backend" {
   ami           = data.aws_ami.ami.image_id
   instance_type = "t3.micro"
@@ -34,6 +44,16 @@ resource "aws_route53_record" "backend" {
   records = [aws_instance.backend.private_ip]
 }
 
+resource "null_resource" "frontend" {
+  provisioner "local-exec" {
+    command = <<EOF
+cd /home/centos/expense-terraform/expense_version-1
+git pull
+ansible-playbook ${aws_instance.backend.private_ip}, ansible_user=centos ansible_password=DevOps321 main.yml -e role_name=backend
+EOF
+  }
+}
+
 resource "aws_instance" "mysql" {
   ami           = data.aws_ami.ami.image_id
   instance_type = "t3.micro"
@@ -50,4 +70,14 @@ resource "aws_route53_record" "mysql" {
   type    = "A"
   ttl     = 30
   records = [aws_instance.mysql.private_ip]
+}
+
+resource "null_resource" "frontend" {
+  provisioner "local-exec" {
+    command = <<EOF
+cd /home/centos/expense-terraform/expense_version-1
+git pull
+ansible-playbook ${aws_instance.mysql.private_ip}, ansible_user=centos ansible_password=DevOps321 main.yml -e role_name=mysql
+EOF
+  }
 }
