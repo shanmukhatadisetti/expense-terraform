@@ -22,7 +22,7 @@ resource "null_resource" "frontend" {
     command = <<EOF
 cd /home/centos/expense-terraform/expense_version-1
 git pull
-ansible-playbook -i ${aws_instance.frontend.private_ip}, ansible_user=centos ansible_password=DevOps321 main.yml -e role_name=frontend
+ansible-playbook -i ${aws_instance.frontend.private_ip}, -e ansible_user=centos -e ansible_password=DevOps321 main.yml -e role_name=frontend
 EOF
   }
 }
@@ -51,7 +51,7 @@ resource "null_resource" "backend" {
     command = <<EOF
 cd /home/centos/expense-terraform/expense_version-1
 git pull
-ansible-playbook -i ${aws_instance.backend.private_ip}, ansible_user=centos ansible_password=DevOps321 main.yml -e role_name=backend
+ansible-playbook -i ${aws_instance.backend.private_ip}, -e ansible_user=centos -e ansible_password=DevOps321 main.yml -e role_name=backend
 EOF
   }
 }
@@ -80,7 +80,7 @@ resource "null_resource" "mysql" {
     command = <<EOF
 cd /home/centos/expense-terraform/expense_version-1
 git pull
-ansible-playbook -i ${aws_instance.mysql.private_ip}, ansible_user=centos ansible_password=DevOps321 main.yml -e role_name=mysql
+ansible-playbook -i ${aws_instance.mysql.private_ip}, -e ansible_user=centos -e ansible_password=DevOps321 main.yml -e role_name=mysql
 EOF
   }
 }
