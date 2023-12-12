@@ -17,6 +17,7 @@ resource "aws_route53_record" "frontend" {
 }
 
 resource "null_resource" "frontend" {
+  depends_on = [aws_route53_record.frontend.zone_id]
   provisioner "local-exec" {
     command = <<EOF
 cd /home/centos/expense-terraform/expense_version-1
@@ -44,7 +45,8 @@ resource "aws_route53_record" "backend" {
   records = [aws_instance.backend.private_ip]
 }
 
-resource "null_resource" "frontend" {
+resource "null_resource" "backend" {
+  depends_on = [aws_route53_record.backend.zone_id]
   provisioner "local-exec" {
     command = <<EOF
 cd /home/centos/expense-terraform/expense_version-1
@@ -72,7 +74,8 @@ resource "aws_route53_record" "mysql" {
   records = [aws_instance.mysql.private_ip]
 }
 
-resource "null_resource" "frontend" {
+resource "null_resource" "mysql" {
+  depends_on = [aws_route53_record.mysql.zone_id]
   provisioner "local-exec" {
     command = <<EOF
 cd /home/centos/expense-terraform/expense_version-1
