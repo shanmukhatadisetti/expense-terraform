@@ -17,7 +17,7 @@ resource "aws_route53_record" "frontend" {
 }
 
 resource "null_resource" "frontend" {
-  depends_on = [aws_route53_record.frontend.zone_id]
+  depends_on = [aws_route53_record.frontend.id]
   provisioner "local-exec" {
     command = <<EOF
 cd /home/centos/expense-terraform/expense_version-1
@@ -46,7 +46,7 @@ resource "aws_route53_record" "backend" {
 }
 
 resource "null_resource" "backend" {
-  depends_on = [aws_route53_record.backend.zone_id]
+  depends_on = [aws_route53_record.backend.id]
   provisioner "local-exec" {
     command = <<EOF
 cd /home/centos/expense-terraform/expense_version-1
@@ -75,7 +75,7 @@ resource "aws_route53_record" "mysql" {
 }
 
 resource "null_resource" "mysql" {
-  depends_on = [aws_route53_record.mysql.zone_id]
+  depends_on = [aws_route53_record.mysql.id]
   provisioner "local-exec" {
     command = <<EOF
 cd /home/centos/expense-terraform/expense_version-1
