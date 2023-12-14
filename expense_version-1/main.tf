@@ -1,5 +1,5 @@
 resource "aws_instance" "frontend" {
-  ami           = data.aws_ami.ami.image_id
+  ami           = local.ami
   instance_type = "t3.micro"
   vpc_security_group_ids = [data.aws_security_group.sg.id]
 
@@ -28,7 +28,7 @@ EOF
 }
 
 resource "aws_instance" "backend" {
-  ami           = data.aws_ami.ami.image_id
+  ami           = local.ami
   instance_type = "t3.micro"
   vpc_security_group_ids = [data.aws_security_group.sg.id]
 
@@ -57,7 +57,7 @@ EOF
 }
 
 resource "aws_instance" "mysql" {
-  ami           = data.aws_ami.ami.image_id
+  ami           = local.ami
   instance_type = "t3.micro"
   vpc_security_group_ids = [data.aws_security_group.sg.id]
 
