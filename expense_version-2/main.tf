@@ -1,14 +1,14 @@
-module "expense" {
+module "frontend" {
   source = "./app_create"
   component = frontend
 }
 
-module "expense" {
+module "backend" {
   source = "./app_create"
   component = backend
 }
 
-module "expense" {
+module "mysql" {
   source = "./app_create"
   component = mysql
 }
