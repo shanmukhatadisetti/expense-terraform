@@ -1,8 +1,14 @@
 module "expense" {
   source = "./app_create"
-  component = var.component
+  component = frontend
 }
 
-variable "component" {
-  default = ["frontend","backend","mysql"]
+module "expense" {
+  source = "./app_create"
+  component = backend
+}
+
+module "expense" {
+  source = "./app_create"
+  component = mysql
 }
