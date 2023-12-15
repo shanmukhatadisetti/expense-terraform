@@ -1,14 +1,14 @@
 module "frontend" {
   source = "./app_create"
-  component = frontend
+  component = "frontend"
 }
 
 module "backend" {
   source = "./app_create"
-  component = backend
+  component = "backend"
 }
 
 module "mysql" {
   source = "./app_create"
-  component = mysql
+  component = "mysql"
 }
