@@ -1,7 +1,5 @@
-resource "null_resource" "test" {
-  provisioner "local-exec" {
-    command = "echo hello universe - ${var.env}.enviromnt"
-  }
+module "vpc" {
+  source = "./modules/vpc"
 }
 
 
