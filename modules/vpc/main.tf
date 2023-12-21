@@ -4,3 +4,13 @@ resource "aws_vpc" "dev-vpc" {
     Name = "${var.env}-vpc"
   }
 }
+
+resource "aws_subnet" "public_subnets" {
+  count = length(var.public_subnets)
+  vpc_id = aws_vpc.dev-vpc.id
+  cidr_block = var.public_subnets[count.index]
+  availability_zone = var.azs[count.index]
+  tags = {
+    Name = "public-subnets-${count.index+1}"
+  }
+}
