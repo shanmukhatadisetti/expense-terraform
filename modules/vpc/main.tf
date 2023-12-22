@@ -45,11 +45,11 @@ resource "aws_nat_gateway" "ngw" {
   }
 }
 
-resource "aws_internet_gateway" "gw" {
+resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc
 
   tags = {
-    Name = "main"
+    Name = "${env-dev}-igw"
   }
 }
 
