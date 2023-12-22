@@ -1,4 +1,4 @@
-resource "aws_vpc" "dev-vpc" {
+resource "aws_vpc" "vpc" {
   cidr_block = var.vpc_cidr
   tags = {
     Name = "${var.env}-vpc"
@@ -7,7 +7,7 @@ resource "aws_vpc" "dev-vpc" {
 
 resource "aws_subnet" "public_subnets" {
   count = length(var.public_subnets)
-  vpc_id = aws_vpc.dev-vpc.id
+  vpc_id = aws_vpc.vpc.id
   cidr_block = var.public_subnets[count.index]
   availability_zone = var.azs[count.index]
   tags = {
@@ -17,7 +17,7 @@ resource "aws_subnet" "public_subnets" {
 
 resource "aws_subnet" "private_subnets" {
   count = length(var.private_subnets)
-  vpc_id = aws_vpc.dev-vpc.id
+  vpc_id = aws_vpc.vpc.id
   cidr_block = var.private_subnets[count.index]
   availability_zone = var.azs[count.index]
   tags = {
@@ -26,7 +26,7 @@ resource "aws_subnet" "private_subnets" {
 }
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.dev-vpc.id
+  vpc_id = aws_vpc.vpc.id
   tags = {
     Name = "${var.env}-igw"
   }
@@ -42,6 +42,14 @@ resource "aws_nat_gateway" "ngw" {
 
   tags = {
     Name = "${var.env}-ngw"
+  }
+}
+
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.vpc
+
+  tags = {
+    Name = "main"
   }
 }
 
