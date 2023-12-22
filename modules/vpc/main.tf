@@ -44,3 +44,7 @@ resource "aws_nat_gateway" "ngw" {
     Name = "${var.env}-ngw"
   }
 }
+
+resource "aws_eip" "ngw" {
+  domain   = "vpc"
+}
