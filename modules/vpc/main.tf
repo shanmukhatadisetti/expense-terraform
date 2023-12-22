@@ -45,14 +45,3 @@ resource "aws_nat_gateway" "ngw" {
   }
 }
 
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.vpc
-
-  tags = {
-    Name = "${env-dev}-igw"
-  }
-}
-
-resource "aws_eip" "ngw" {
-  domain   = "vpc"
-}
