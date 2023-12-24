@@ -5,5 +5,6 @@ private_subnets = ["10.0.2.0/24","10.0.3.0/24"]
 azs = ["us-east-1a","us-east-1b"]
 peer_owner_id = "430774481266"
 default_vpc_id = "vpc-00c264dccd66ea0e6"
+default_vpc_cidr = "172.31.0.0/16"
 
 

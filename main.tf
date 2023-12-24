@@ -7,6 +7,7 @@ module "vpc" {
   azs = var.azs
   peer_owner_id = var.peer_owner_id
   default_vpc_id = var.default_vpc_id
+  default_vpc_cidr = var.default_vpc_cidr
 }
 
 
