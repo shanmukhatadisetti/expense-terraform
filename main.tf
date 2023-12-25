@@ -22,3 +22,14 @@ module "public_alb" {
   vpc_id            = module.vpc.vpc_id
 }
 
+module "private_alb" {
+  source = "./modules/alb"
+
+  alb_sg_allow_cidr = var.vpc_cidr
+  alb_type          = "private"
+  env               = var.env
+  internal          = true
+  subnets           = module.vpc.private_subnets
+  vpc_id            = module.vpc.vpc_id
+}
+
