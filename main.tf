@@ -59,7 +59,7 @@ module "vpc" {
 #  bastion_node_cidr         = var.bastion_node_cidr
 #}
 
-module "rds" {
+module "mysql" {
   source = "./modules/rds"
 
   component = "mysql"
