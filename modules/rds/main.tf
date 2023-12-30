@@ -37,6 +37,7 @@ resource "aws_rds_cluster" "rds_cluster" {
   cluster_identifier      = "${var.env}-${var.component}"
   engine                  = "aurora-mysql"
   engine_version          = "5.7.mysql_aurora.2.11.3"
+  final_snapshot_identifier = false
   db_subnet_group_name    = aws_db_subnet_group.subnet_group.name
   database_name           = "dummy"
   master_username         = data.aws_ssm_parameter.master_username.value
