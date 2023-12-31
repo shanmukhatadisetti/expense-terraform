@@ -31,6 +31,8 @@ module "private_alb" {
   internal          = true
   subnets           = module.vpc.private_subnets
   vpc_id            = module.vpc.vpc_id
+  dns_name          = "backend-${var.env}.autonagar.in"
+  zone_id           = "Z10413961HT8PFBW9XTRT"
 }
 
 #module "frontend" {
