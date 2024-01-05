@@ -123,4 +123,13 @@ resource "aws_lb_target_group" "target_group" {
   port     = var.application-server_port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
+  health_check {
+    enabled = true
+    healthy_threshold = 2
+    interval = 5
+    path = "/health"
+    port = var.application-server_port
+    timeout = 3
+    unhealthy_threshold = 2
+  }
 }
