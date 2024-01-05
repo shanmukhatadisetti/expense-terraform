@@ -33,6 +33,7 @@ module "private_alb" {
   vpc_id            = module.vpc.vpc_id
   dns_name          = "backend-${var.env}.autonagar.in"
   zone_id           = "Z10413961HT8PFBW9XTRT"
+  tg_arn            = module.backend.tg_arn
 }
 
 #module "frontend" {
