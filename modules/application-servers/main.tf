@@ -120,7 +120,7 @@ resource "aws_autoscaling_group" "asg" {
 
 resource "aws_lb_target_group" "target_group" {
   name     = "${var.env}-${var.component}-tg"
-  port     = 8080
+  port     = var.application-server_port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
 }
