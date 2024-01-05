@@ -51,6 +51,7 @@ module "private_alb" {
 #
 module "backend" {
   source = "./modules/application-servers"
+  depends_on = [module.mysql]
 
   application-server_port   = 8080
   component                 = "backend"
