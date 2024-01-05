@@ -11,17 +11,20 @@ module "vpc" {
   default_route_table_id = var.default_route_table_id
 }
 
-#module "public_alb" {
-#  source = "./modules/alb"
-#
-#  alb_sg_allow_cidr = "0.0.0.0/0"
-#  alb_type          = "public"
-#  env               = var.env
-#  internal          = false
-#  subnets           = module.vpc.public_subnets
-#  vpc_id            = module.vpc.vpc_id
-#}
-#
+module "public_alb" {
+  source = "./modules/alb"
+
+  alb_sg_allow_cidr = "0.0.0.0/0"
+  alb_type          = "public"
+  env               = var.env
+  internal          = false
+  subnets           = module.vpc.public_subnets
+  vpc_id            = module.vpc.vpc_id
+  dns_name          = "${var.env}.autonagar.in"
+  zone_id           = "Z10413961HT8PFBW9XTRT"
+  tg_arn            = module.frontend.tg_arn
+}
+
 module "private_alb" {
   source = "./modules/alb"
 
