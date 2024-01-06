@@ -42,10 +42,25 @@ resource "aws_route53_record" "record" {
   records = [aws_lb.alb.dns_name]
 }
 
-resource "aws_lb_listener" "listener" {
+resource "aws_lb_listener" "listener-http" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
   protocol          = "HTTP"
+
+
+  default_action {
+    type             = "forward"
+    target_group_arn = var.tg_arn
+  }
+}
+
+resource "aws_lb_listener" "listener-https" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:acm:us-east-1:430774481266:certificate/e4c0f015-d149-454e-b437-2f25a4038e76"
+
 
   default_action {
     type             = "forward"
