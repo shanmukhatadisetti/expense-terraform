@@ -8,10 +8,18 @@ pipeline {
    ansiColor('xterm')
   }
  stages {
-  stage('Terraform Apply'){
+  stage('Terraform Plan'){
    steps{
     sh 'terraform init -backend-config=env-${ENV}/state.tfvars'
-    sh 'terraform plan -var-file=env-${ENV}/inputs.tfvars'
+    sh 'terraform ${ACTION} -var-file=env-${ENV}/inputs.tfvars'
+    }
+   }
+  stage('Terraform Apply'){
+   input {
+    message "Should we continue?"
+    }
+   steps{
+    sh 'terraform ${ACTION} -var-file=env=${ENV}/inputs.tfvars'
     }
    }
   }
