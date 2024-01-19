@@ -1,7 +1,7 @@
 pipeline {
  agent { label 'workstation' }
  parameters {
-  choice(name: 'ENV', choices: ['env', 'prod'], description: 'Choose Environment')
+  choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Choose Environment')
   }
  stages {
   stage('Terraform Apply'){
